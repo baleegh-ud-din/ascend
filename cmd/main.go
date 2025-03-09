@@ -82,7 +82,7 @@ func GracefulShutdown(server *http.Server) {
 	<-quit
 
 	fmt.Println("")
-	logger.Warning("⚠️  Server is shutting down...")
+	logger.Warning("🛬 Server is shutting down...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

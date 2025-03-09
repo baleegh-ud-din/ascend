@@ -25,19 +25,19 @@ func Connect(cfg *config.Config) {
 	var err error
 	DB, err = sql.Open("postgres", connStr)
 	if err != nil {
-		failmsg := fmt.Sprintf("Failed to connect to database: %s", err)
+		failmsg := fmt.Sprintf("❌ Failed to connect to database: %s", err)
 		logger.Error(failmsg)
 		return
 	}
 
 	err = DB.Ping()
 	if err != nil {
-		failmsg := fmt.Sprintf("Failed to ping database: %s", err)
+		failmsg := fmt.Sprintf("❌ Failed to ping database: %s", err)
 		logger.Error(failmsg)
 		return
 	}
 
-	logger.Info("Database connection established successfully")
+	logger.Info("✅ Connected to Ascend Database")
 	CreateSchemas()
 	CreateMigrations()
 }
@@ -46,17 +46,17 @@ func Close() {
 	if DB != nil {
 		err := DB.Close()
 		if err != nil {
-			failmsg := fmt.Sprintf("Failed to close database connection: %s", err)
+			failmsg := fmt.Sprintf("❌ Failed to close database connection: %s", err)
 			logger.Error(failmsg)
 		} else {
-			logger.Info("Database connection closed successfully")
+			logger.Info("🔌 Database connection closed successfully")
 		}
 	}
 }
 
 func ValidateDB() {
 	if DB == nil {
-		logger.Error("Database connection is not initialized. Please check your Connect")
+		logger.Error("🔌 Database connection is not initialized. Please check your Connect")
 		return
 	}
 }

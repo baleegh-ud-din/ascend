@@ -29,7 +29,6 @@ func CreateSchemas() error {
 		// 	previous_data JSONB NULL,
 		// 	updated_data JSONB,
 		// 	message TEXT,
-		// 	desflow VARCHAR(20),
 		// 	updater VARCHAR(255) NOT NULL,
 		// 	approver VARCHAR(255),
 		// 	created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,

@@ -29,9 +29,9 @@ func getEnv(key, defaultValue string) string {
 
 func LoadConfig() *Config {
 	err := godotenv.Load("./.env")
-	logger.Info("🛠️ Loading Config from .env file ...")
+	logger.Info("🛠️  Loading Config from env file...")
 	if err != nil {
-		logger.Warning("⚠️ .env file not found, relying on local environment variables")
+		logger.Warning("⚠️  env file not found, relying on local environment variables")
 	}
 
 	return &Config{
