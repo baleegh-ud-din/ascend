@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ascend-deployment
+  labels:
+    app: ascend
+spec:
+  replicas: 2  # Set the desired number of replicas
+  selector:
+    matchLabels:
+      app: ascend
+  template:
+    metadata:
+      labels:
+        app: ascend
+    spec:
+      containers:
+        - name: ascend
+          image: dockerhub-username/ascend-app:latest
+          ports:
+            - containerPort: 8443
+          env:
+            - name: ENV_FILE
+              value: "/app/.env"
+          volumeMounts:
+            - name: env-volume
+              mountPath: /app/.env
+              subPath: .env
+      volumes:
+        - name: env-volume
+          configMap:
+            name: ascend-env
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ascend-service
+spec:
+  selector:
+    app: ascend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8443
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ascend-env
+data:
+  .env: |
+    # environment variables here
