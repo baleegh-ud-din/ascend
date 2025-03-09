@@ -15,7 +15,8 @@ build-server:
 	go build -o ./bin/v$(VERSION)/$(APP) ./cmd/main.go
 	go build -o ./app/server/$(APP) ./cmd/main.go
 
-dev: ui-dev server-dev
+dev: 
+	make ui-dev & make server-dev
 
 ui-dev:
 	cd ui && pnpm run dev
